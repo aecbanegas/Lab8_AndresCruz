@@ -566,13 +566,30 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (puederecorrer) {
             if (haybuses&&hayestudiantes&&hayparadas) {
+                ArrayList<Estudiante>est=new ArrayList();
+                for (int i = 0; i < estudiantes.size(); i++) {
+                    est.add(estudiantes.get(i));
+                }
                 String imprimir="";
                 for (int i = 0; i < buses.size(); i++) {
                     imprimir+=i+" - "+buses.get(i)+"\n";
                 }
                 try {
                     int pos=Integer.parseInt(JOptionPane.showInputDialog(imprimir+"Ingrese la posicion del bus que desea usar: "));
-                    Recorrido rec=new Recorrido(pb_recorrido, puederecorrer, buses.get(pos), paradas, estudiantes, tab_resumen);
+                    boolean flag=true;
+                    while(flag){
+                        imprimir="";
+                        for (int i = 0; i < est.size(); i++) {
+                            imprimir+=i+" - "+est.get(i)+"\n";
+                        }
+                        int opt=Integer.parseInt(JOptionPane.showInputDialog(imprimir+"Ingrese la posicion del estudiante que desea agregar:"));
+                        buses.get(pos).getEstudiantes().add(est.get(opt));
+                        int opc=Integer.parseInt(JOptionPane.showInputDialog("Ingrese 1 para salir y otro numero para seguir y agregar otro estudiante:"));
+                        if (opc==1) {
+                            flag=false;
+                        }
+                    }
+                    Recorrido rec=new Recorrido(pb_recorrido, puederecorrer, buses.get(pos), paradas, tab_resumen);
                     Thread a=new Thread(rec);
                     a.start();
                     puederecorrer=false;

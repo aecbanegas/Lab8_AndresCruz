@@ -356,6 +356,8 @@ public class Principal extends javax.swing.JFrame {
         });
 
         pb_recorrido.setToolTipText("");
+        pb_recorrido.setString("");
+        pb_recorrido.setStringPainted(true);
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Recorrido Bus");
@@ -542,6 +544,7 @@ public class Principal extends javax.swing.JFrame {
                 Double distancia = (Double) js_distanciaparada.getValue();
                 Double angulo = Math.toRadians((Double) js_angulo.getValue());
                 paradas.add(new Parada(nombre, distancia, angulo));
+                paradas_rep.add(new Parada(nombre, distancia, angulo));
                 hayparadas = true;
                 JOptionPane.showMessageDialog(jd_addparadas, "Se agrego de manera exitosa!");
                 DefaultComboBoxModel modelo = (DefaultComboBoxModel) cb_paradaestudiantes.getModel();
@@ -562,7 +565,24 @@ public class Principal extends javax.swing.JFrame {
     private void bt_iniciarrecorridoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_iniciarrecorridoMouseClicked
         // TODO add your handling code here:
         if (puederecorrer) {
-            
+            if (haybuses&&hayestudiantes&&hayparadas) {
+                String imprimir="";
+                for (int i = 0; i < buses.size(); i++) {
+                    imprimir+=i+" - "+buses.get(i)+"\n";
+                }
+                try {
+                    int pos=Integer.parseInt(JOptionPane.showInputDialog(imprimir+"Ingrese la posicion del bus que desea usar: "));
+                    Recorrido rec=new Recorrido(pb_recorrido, puederecorrer, buses.get(pos), paradas, estudiantes, tab_resumen);
+                    Thread a=new Thread(rec);
+                    a.start();
+                    puederecorrer=false;
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Ha ocurrido un error!");
+                    e.printStackTrace();
+                }
+            }else{
+            JOptionPane.showMessageDialog(this, "Cree buses, estudiantes y paradas para usar esta opcion!");
+            }
         }else{
         JOptionPane.showMessageDialog(this, "Ya se esta haciendo una ruta!");
         }
@@ -651,6 +671,7 @@ public class Principal extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     private ArrayList<Estudiante> estudiantes = new ArrayList();
     private ArrayList<Parada> paradas = new ArrayList();
+    private ArrayList<Parada> paradas_rep = new ArrayList();
     private ArrayList<Autobus> buses = new ArrayList();
     private boolean hayparadas = false;
     private boolean haybuses = false;

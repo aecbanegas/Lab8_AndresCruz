@@ -30,12 +30,8 @@ public class Recorrido implements Runnable {
     public Recorrido(JProgressBar pb, boolean puede, Autobus bus, ArrayList<Parada> pd, ArrayList<Estudiante> est, JTable tabla) {
         this.pb = pb;
         this.puede = puede;
-        for (int i = 0; i < pd.size(); i++) {
-            this.pd.add(pd.get(i));
-        }
-        for (int i = 0; i < est.size(); i++) {
-            this.est.add(est.get(i));
-        }
+        this.pd = pd;
+        this.est = est;
         this.tabla = tabla;
         this.bus = bus;
         fecha = new Date();
@@ -44,32 +40,39 @@ public class Recorrido implements Runnable {
     }
 
     public double distancia(ArrayList<Parada> pd) {
-        if (cont == 0) {
-            int index = 0;
-            Double menor = 999999999.9;
-            for (int i = 0; i < pd.size(); i++) {
-                if (pd.get(i).getDistancia() < menor) {
-                    index = i;
-                    menor = pd.get(i).getDistancia();
+        if ((pd.size()!=0)) {
+            if (cont == 0) {
+                int index = 0;
+                Double menor = 999999999.9;
+                for (int i = 0; i < pd.size(); i++) {
+                    if (pd.get(i).getDistancia() < menor) {
+                        index = i;
+                        menor = pd.get(i).getDistancia();
+                    }
                 }
-            }
-            cont++;
-            actual = pd.get(index);
-            ante = index;
-            return actual.getDistancia();
-        } else {
-            ArrayList<Double> d = new ArrayList();
-            int index = 0;
-            Double menor = 999999999.9;
-            for (int i = 0; i < pd.size(); i++) {
-                if (Math.sqrt(Math.pow(pd.get(i).getX() - actual.getX(), 2) + Math.pow(pd.get(i).getY() - actual.getY(), 2)) < menor) {
-                    menor = Math.sqrt(Math.pow(pd.get(i).getX() - actual.getX(), 2) + Math.pow(pd.get(i).getY() - actual.getY(), 2));
-                    index = i;
+                cont++;
+                actual = pd.get(index);
+                ante = index;
+                return actual.getDistancia();
+            } else {
+                ArrayList<Double> d = new ArrayList();
+                int index = 0;
+                Double menor = 999999999.9;
+                for (int i = 0; i < pd.size(); i++) {
+                    if (Math.sqrt(Math.pow(pd.get(i).getX() - actual.getX(), 2) + Math.pow(pd.get(i).getY() - actual.getY(), 2)) < menor) {
+                        menor = Math.sqrt(Math.pow(pd.get(i).getX() - actual.getX(), 2) + Math.pow(pd.get(i).getY() - actual.getY(), 2));
+                        index = i;
+                    }
                 }
+                pd.remove(ante);
+                actual = pd.get(index);
+                ante = index;
+                return menor;
             }
-            pd.remove(ante);
-            actual = pd.get(index);
-            ante = index;
+        }else{
+            double menor=Math.sqrt(Math.pow(0 - actual.getX(), 2) + Math.pow(0 - actual.getY(), 2));
+            pd.remove(ante);   
+            actual=new Parada("UNITEC", 1500, 180);
             return menor;
         }
 
@@ -77,6 +80,7 @@ public class Recorrido implements Runnable {
 
     public double tiempo(Autobus bus, double distancia) {
         double time = (distancia / bus.getVelocidad()) * 60;
+        System.out.println(time);
         int max = (int) Math.round(time);
         pb.setMaximum(max);
         pb.setString("" + actual.getNombre() + " faltan " + pb.getValue() + " minutos");
@@ -187,15 +191,14 @@ public class Recorrido implements Runnable {
             if (puede) {
                 if (parada) {
                     pb.setValue(pb.getValue() + 1);
-                    pb.setString("" + actual.getNombre() + " faltan " + pb.getValue() + " minutos");
+                    pb.setString("" + actual.getNombre() + " faltan " + (pb.getMaximum() - pb.getValue()) + " minutos");
                     if (pb.getValue() == pb.getMaximum()) {
                         parada = false;
-                        JOptionPane.showMessageDialog(null, "Se completo el recorrido hacia "+actual.getNombre());
+                        JOptionPane.showMessageDialog(null, "Se completo el recorrido hacia " + actual.getNombre());
                         distancia = distancia(pd);
                         tiempo = tiempo(bus, distancia);
+                        pb.setMaximum((int)Math.round(tiempo));
                     }
-                } else {
-
                 }
             }
 

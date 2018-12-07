@@ -68,7 +68,7 @@ public class Autobus {
 
     @Override
     public String toString() {
-        return "Autobus{" + "id=" + id + ", placa=" + placa + ", color=" + color + ", velocidad=" + velocidad + ", estudiantes=" + estudiantes + '}';
+        return "Autobus id=" + id;
     }
     
     

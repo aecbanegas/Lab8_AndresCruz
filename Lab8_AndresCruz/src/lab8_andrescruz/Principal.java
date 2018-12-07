@@ -7,7 +7,9 @@ package lab8_andrescruz;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JColorChooser;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -35,35 +37,37 @@ public class Principal extends javax.swing.JFrame {
         jd_addbus = new javax.swing.JDialog();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        tf_idbus = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        bt_color = new javax.swing.JButton();
+        tf_placabus = new javax.swing.JTextField();
+        bt_colorbus = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
+        js_velbus = new javax.swing.JSpinner();
         jLabel8 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        jb_agregarbus = new javax.swing.JButton();
         jd_addestudiante = new javax.swing.JDialog();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        tf_nombreestudiante = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jSpinner3 = new javax.swing.JSpinner();
+        js_edad = new javax.swing.JSpinner();
         jLabel12 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        tf_cuenta = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cb_paradaestudiantes = new javax.swing.JComboBox<>();
         jButton3 = new javax.swing.JButton();
         jd_addparadas = new javax.swing.JDialog();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        tf_nombreparada = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
-        jSpinner4 = new javax.swing.JSpinner();
+        js_distanciaparada = new javax.swing.JSpinner();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
+        js_angulo = new javax.swing.JSpinner();
+        jLabel19 = new javax.swing.JLabel();
         jSpinner2 = new javax.swing.JSpinner();
         jScrollPane1 = new javax.swing.JScrollPane();
         tab_resumen = new javax.swing.JTable();
@@ -83,10 +87,10 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel5.setText("Placa:");
 
-        bt_color.setBackground(new java.awt.Color(255, 102, 102));
-        bt_color.addMouseListener(new java.awt.event.MouseAdapter() {
+        bt_colorbus.setBackground(new java.awt.Color(255, 102, 102));
+        bt_colorbus.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                bt_colorMouseClicked(evt);
+                bt_colorbusMouseClicked(evt);
             }
         });
 
@@ -94,11 +98,16 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel7.setText("Velocidad:");
 
-        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 320.0d, 1.0d));
+        js_velbus.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 320.0d, 1.0d));
 
         jLabel8.setText("KM/H");
 
-        jButton2.setText("Agregar");
+        jb_agregarbus.setText("Agregar");
+        jb_agregarbus.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_agregarbusMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jd_addbusLayout = new javax.swing.GroupLayout(jd_addbus.getContentPane());
         jd_addbus.getContentPane().setLayout(jd_addbusLayout);
@@ -114,13 +123,13 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addGroup(jd_addbusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
+                    .addComponent(jb_agregarbus)
                     .addGroup(jd_addbusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(bt_color, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                        .addComponent(jTextField2))
+                        .addComponent(bt_colorbus, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tf_idbus, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                        .addComponent(tf_placabus))
                     .addGroup(jd_addbusLayout.createSequentialGroup()
-                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(js_velbus, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel8)))
                 .addContainerGap(28, Short.MAX_VALUE))
@@ -132,22 +141,22 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jd_addbusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tf_idbus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jd_addbusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tf_placabus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jd_addbusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(bt_color, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(bt_colorbus, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jd_addbusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(js_velbus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
                 .addGap(43, 43, 43)
-                .addComponent(jButton2)
+                .addComponent(jb_agregarbus)
                 .addGap(0, 27, Short.MAX_VALUE))
         );
 
@@ -159,13 +168,18 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel11.setText("Edad:");
 
-        jSpinner3.setModel(new javax.swing.SpinnerNumberModel(15, 14, 150, 1));
+        js_edad.setModel(new javax.swing.SpinnerNumberModel(15, 14, 150, 1));
 
         jLabel12.setText("Cuenta:");
 
         jLabel13.setText("Parada:");
 
         jButton3.setText("Agregar");
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -188,16 +202,16 @@ public class Principal extends javax.swing.JFrame {
                                     .addComponent(jLabel11))
                                 .addGap(18, 18, 18)
                                 .addGroup(jd_addestudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jSpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(tf_nombreestudiante, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(js_edad, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jd_addestudianteLayout.createSequentialGroup()
                                 .addComponent(jLabel12)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField4))
+                                .addComponent(tf_cuenta))
                             .addGroup(jd_addestudianteLayout.createSequentialGroup()
                                 .addComponent(jLabel13)
                                 .addGap(18, 18, 18)
-                                .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(cb_paradaestudiantes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(jd_addestudianteLayout.createSequentialGroup()
                         .addGap(88, 88, 88)
                         .addComponent(jButton3)))
@@ -210,19 +224,19 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addGroup(jd_addestudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tf_nombreestudiante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jd_addestudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(jSpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(js_edad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jd_addestudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tf_cuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jd_addestudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cb_paradaestudiantes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(jButton3)
                 .addContainerGap())
@@ -236,13 +250,22 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel16.setText("Distancia:");
 
-        jSpinner4.setModel(new javax.swing.SpinnerNumberModel(1.0d, 1.0d, null, 1.0d));
+        js_distanciaparada.setModel(new javax.swing.SpinnerNumberModel(1.0d, 1.0d, null, 1.0d));
 
         jLabel17.setText("KM");
 
         jLabel18.setText("Angulo:");
 
         jButton5.setText("Agregar");
+        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton5MouseClicked(evt);
+            }
+        });
+
+        js_angulo.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 360.0d, 1.0d));
+
+        jLabel19.setText("Grados");
 
         javax.swing.GroupLayout jd_addparadasLayout = new javax.swing.GroupLayout(jd_addparadas.getContentPane());
         jd_addparadas.getContentPane().setLayout(jd_addparadasLayout);
@@ -255,14 +278,21 @@ public class Principal extends javax.swing.JFrame {
                     .addGroup(jd_addparadasLayout.createSequentialGroup()
                         .addComponent(jLabel15)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(tf_nombreparada, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jd_addparadasLayout.createSequentialGroup()
-                        .addComponent(jLabel16)
+                        .addGroup(jd_addparadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jd_addparadasLayout.createSequentialGroup()
+                                .addComponent(jLabel18)
+                                .addGap(18, 18, 18)
+                                .addComponent(js_angulo))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jd_addparadasLayout.createSequentialGroup()
+                                .addComponent(jLabel16)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(js_distanciaparada, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jSpinner4, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel17))
-                    .addComponent(jLabel18))
+                        .addGroup(jd_addparadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel17)
+                            .addComponent(jLabel19))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_addparadasLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -276,17 +306,20 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jd_addparadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tf_nombreparada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jd_addparadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
-                    .addComponent(jSpinner4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(js_distanciaparada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel17))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel18)
+                .addGroup(jd_addparadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel18)
+                    .addComponent(js_angulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel19))
                 .addGap(18, 18, 18)
                 .addComponent(jButton5)
-                .addGap(0, 22, Short.MAX_VALUE))
+                .addGap(0, 16, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -302,10 +335,25 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tab_resumen);
 
         jButton1.setText("Agregar Paradas");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         addestudiantes.setText("Agregar Estudiantes");
+        addestudiantes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addestudiantesMouseClicked(evt);
+            }
+        });
 
         addbus.setText("Agregar Autobuses");
+        addbus.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addbusMouseClicked(evt);
+            }
+        });
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Recorrido Bus");
@@ -360,14 +408,149 @@ public class Principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bt_colorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_colorMouseClicked
+    private void bt_colorbusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_colorbusMouseClicked
         // TODO add your handling code here:
-        bt_color.setBackground(JColorChooser.showDialog(this, "Seleccione un color", Color.yellow));
-    }//GEN-LAST:event_bt_colorMouseClicked
+        bt_colorbus.setBackground(JColorChooser.showDialog(this, "Seleccione un color", Color.yellow));
+    }//GEN-LAST:event_bt_colorbusMouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void addbusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addbusMouseClicked
+        // TODO add your handling code here:
+        jd_addbus.setLocationRelativeTo(this);
+        jd_addbus.setModal(true);
+        jd_addbus.pack();
+        jd_addbus.setVisible(true);
+    }//GEN-LAST:event_addbusMouseClicked
+
+    private void jb_agregarbusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_agregarbusMouseClicked
+        // TODO add your handling code here:
+        boolean entrar = true;
+        if (tf_idbus.getText().equals("") || tf_placabus.getText().equals("")) {
+            entrar = false;
+        }
+        if (entrar) {
+            try {
+                String id = tf_idbus.getText();
+                String placa = tf_placabus.getText();
+                Color color = bt_colorbus.getBackground();
+                Double velocidad = (Double) js_velbus.getValue();
+                buses.add(new Autobus(id, placa, color, velocidad));
+                haybuses = true;
+                JOptionPane.showMessageDialog(jd_addbus, "Se agrego de manera exitosa!");
+                tf_idbus.setText("");
+                tf_placabus.setText("");
+                bt_colorbus.setBackground(Color.red);
+                js_velbus.setValue(0);
+                jd_addbus.dispose();
+            } catch (Exception e) {
+            }
+        } else {
+            JOptionPane.showMessageDialog(jd_addbus, "Hay campos vacios!");
+        }
+
+    }//GEN-LAST:event_jb_agregarbusMouseClicked
+
+    private void addestudiantesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addestudiantesMouseClicked
+        // TODO add your handling code here:
+        if (hayparadas) {
+            jd_addestudiante.setLocationRelativeTo(this);
+            jd_addestudiante.setModal(true);
+            jd_addestudiante.pack();
+            jd_addestudiante.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "No hay paradas disponibles, cree una parada primero.");
+        }
+    }//GEN-LAST:event_addestudiantesMouseClicked
+    
+    public boolean validacioncuenta(String cuenta) {
+        int cont = 0;
+        for (int i = 0; i < cuenta.length(); i++) {
+            if (Character.isDigit(cuenta.charAt(i))) {
+                cont++;
+            }
+        }
+        if (cont == cuenta.length()) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
+    public boolean validacionunica(String cuenta) {
+        for (int i = 0; i < estudiantes.size(); i++) {
+            if (estudiantes.get(i).getCuenta().equals(cuenta)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        // TODO add your handling code here:
+        boolean entrar = true;
+        if (tf_nombreestudiante.getText().equals("") || tf_cuenta.getText().equals("") || validacioncuenta(tf_cuenta.getText()) || validacionunica(tf_cuenta.getText())) {
+            entrar = false;
+        }
+        if (entrar) {
+            try {
+                String nombre = tf_nombreestudiante.getText();
+                String cuenta = tf_cuenta.getText();
+                Parada parada = (Parada) cb_paradaestudiantes.getSelectedItem();
+                int edad = (Integer) js_edad.getValue();
+                estudiantes.add(new Estudiante(nombre, edad, cuenta, parada));
+                hayestudiantes = true;
+                JOptionPane.showMessageDialog(jd_addestudiante, "Se agrego de manera exitosa!");
+                tf_nombreestudiante.setText("");
+                tf_cuenta.setText("");
+                cb_paradaestudiantes.setSelectedIndex(0);
+                js_edad.setValue(15);
+                jd_addestudiante.dispose();
+            } catch (Exception e) {
+            }
+        } else {
+            JOptionPane.showMessageDialog(jd_addestudiante, "Hay campos vacios!");
+        }
+    }//GEN-LAST:event_jButton3MouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        jd_addparadas.setModal(true);
+        jd_addparadas.setLocationRelativeTo(this);
+        jd_addparadas.pack();
+        jd_addparadas.setVisible(true);
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+        // TODO add your handling code here:
+        boolean entrar = true;
+        if (tf_nombreparada.getText().equals("")) {
+            entrar = false;
+        }
+        if (entrar) {
+            try {
+                String nombre = tf_nombreparada.getText();
+                Double distancia = (Double) js_distanciaparada.getValue();
+                Double angulo = (Double) js_angulo.getValue();
+                paradas.add(new Parada(nombre, distancia, angulo));
+                hayparadas = true;
+                JOptionPane.showMessageDialog(jd_addparadas, "Se agrego de manera exitosa!");
+                DefaultComboBoxModel modelo = (DefaultComboBoxModel) cb_paradaestudiantes.getModel();
+                modelo.addElement(paradas.get(paradas.size() - 1));
+                cb_paradaestudiantes.setModel(modelo);
+                tf_nombreparada.setText("");
+                js_distanciaparada.setValue(1);
+                js_angulo.setValue(0);
+                jd_addparadas.dispose();
+            } catch (Exception e) {
+            }
+            
+        } else {
+            JOptionPane.showMessageDialog(jd_addestudiante, "Hay campos vacios!");
+        }
+    }//GEN-LAST:event_jButton5MouseClicked
 
     /**
      * @param args the command line arguments
@@ -407,13 +590,12 @@ public class Principal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addbus;
     private javax.swing.JButton addestudiantes;
-    private javax.swing.JButton bt_color;
+    private javax.swing.JButton bt_colorbus;
+    private javax.swing.JComboBox<String> cb_paradaestudiantes;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -424,6 +606,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -433,25 +616,27 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JSpinner jSpinner2;
-    private javax.swing.JSpinner jSpinner3;
-    private javax.swing.JSpinner jSpinner4;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JButton jb_agregarbus;
     private javax.swing.JDialog jd_addbus;
     private javax.swing.JDialog jd_addestudiante;
     private javax.swing.JDialog jd_addparadas;
+    private javax.swing.JSpinner js_angulo;
+    private javax.swing.JSpinner js_distanciaparada;
+    private javax.swing.JSpinner js_edad;
+    private javax.swing.JSpinner js_velbus;
     private javax.swing.JProgressBar pb_recorrido;
     private javax.swing.JTable tab_resumen;
+    private javax.swing.JTextField tf_cuenta;
+    private javax.swing.JTextField tf_idbus;
+    private javax.swing.JTextField tf_nombreestudiante;
+    private javax.swing.JTextField tf_nombreparada;
+    private javax.swing.JTextField tf_placabus;
     // End of variables declaration//GEN-END:variables
-    private ArrayList<Estudiante>estudiantes=new ArrayList();
-    private ArrayList<Parada>paradas=new ArrayList();
-    private ArrayList<Autobus>buses=new ArrayList();
-    private boolean hayparadas=false;
-    private boolean haybuses=false;
-    private boolean hayestudiantes=false;
+    private ArrayList<Estudiante> estudiantes = new ArrayList();
+    private ArrayList<Parada> paradas = new ArrayList();
+    private ArrayList<Autobus> buses = new ArrayList();
+    private boolean hayparadas = false;
+    private boolean haybuses = false;
+    private boolean hayestudiantes = false;
 }

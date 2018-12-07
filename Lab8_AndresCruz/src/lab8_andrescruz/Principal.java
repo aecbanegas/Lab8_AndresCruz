@@ -473,7 +473,7 @@ public class Principal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "No hay paradas disponibles, cree una parada primero.");
         }
     }//GEN-LAST:event_addestudiantesMouseClicked
-    
+
     public boolean validacioncuenta(String cuenta) {
         int cont = 0;
         for (int i = 0; i < cuenta.length(); i++) {
@@ -487,7 +487,7 @@ public class Principal extends javax.swing.JFrame {
             return true;
         }
     }
-    
+
     public boolean validacionunica(String cuenta) {
         for (int i = 0; i < estudiantes.size(); i++) {
             if (estudiantes.get(i).getCuenta().equals(cuenta)) {
@@ -556,7 +556,7 @@ public class Principal extends javax.swing.JFrame {
                 jd_addparadas.dispose();
             } catch (Exception e) {
             }
-            
+
         } else {
             JOptionPane.showMessageDialog(jd_addestudiante, "Hay campos vacios!");
         }
@@ -564,45 +564,47 @@ public class Principal extends javax.swing.JFrame {
 
     private void bt_iniciarrecorridoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_iniciarrecorridoMouseClicked
         // TODO add your handling code here:
-        if (puederecorrer) {
-            if (haybuses&&hayestudiantes&&hayparadas) {
-                ArrayList<Estudiante>est=new ArrayList();
+        
+            if (haybuses && hayestudiantes && hayparadas) {
+                ArrayList<Estudiante> est = new ArrayList();
                 for (int i = 0; i < estudiantes.size(); i++) {
                     est.add(estudiantes.get(i));
                 }
-                String imprimir="";
+                String imprimir = "";
                 for (int i = 0; i < buses.size(); i++) {
-                    imprimir+=i+" - "+buses.get(i)+"\n";
+                    imprimir += i + " - " + buses.get(i) + "\n";
                 }
                 try {
-                    int pos=Integer.parseInt(JOptionPane.showInputDialog(imprimir+"Ingrese la posicion del bus que desea usar: "));
-                    boolean flag=true;
-                    while(flag){
-                        imprimir="";
+                    int pos = Integer.parseInt(JOptionPane.showInputDialog(imprimir + "Ingrese la posicion del bus que desea usar: "));
+                    boolean flag = true;
+                    while (flag) {
+                        imprimir = "";
                         for (int i = 0; i < est.size(); i++) {
-                            imprimir+=i+" - "+est.get(i)+"\n";
+                            imprimir += i + " - " + est.get(i) + "\n";
                         }
-                        int opt=Integer.parseInt(JOptionPane.showInputDialog(imprimir+"Ingrese la posicion del estudiante que desea agregar:"));
-                        buses.get(pos).getEstudiantes().add(est.get(opt));
-                        int opc=Integer.parseInt(JOptionPane.showInputDialog("Ingrese 1 para salir y otro numero para seguir y agregar otro estudiante:"));
-                        if (opc==1) {
-                            flag=false;
+                        if (!est.isEmpty()) {
+                            int opt = Integer.parseInt(JOptionPane.showInputDialog(imprimir + "Ingrese la posicion del estudiante que desea agregar:"));
+                            buses.get(pos).getEstudiantes().add(est.get(opt));
+                            est.remove(opt);
+                            int opc = Integer.parseInt(JOptionPane.showInputDialog("Ingrese 1 para salir y otro numero para seguir y agregar otro estudiante:"));
+                            if (opc == 1) {
+                                flag = false;
+                            }
+                        } else {
+                            flag = false;
                         }
+
                     }
-                    Recorrido rec=new Recorrido(pb_recorrido, puederecorrer, buses.get(pos), paradas, tab_resumen);
-                    Thread a=new Thread(rec);
+                    Recorrido rec = new Recorrido(pb_recorrido, puederecorrer, buses.get(pos), paradas, tab_resumen);
+                    Thread a = new Thread(rec);
                     a.start();
-                    puederecorrer=false;
+                    puederecorrer = false;
                 } catch (Exception e) {
-                    JOptionPane.showMessageDialog(this, "Ha ocurrido un error!");
-                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(this, "Ha ocurrido un error!");                    
                 }
-            }else{
-            JOptionPane.showMessageDialog(this, "Cree buses, estudiantes y paradas para usar esta opcion!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Cree buses, estudiantes y paradas para usar esta opcion!");
             }
-        }else{
-        JOptionPane.showMessageDialog(this, "Ya se esta haciendo una ruta!");
-        }
     }//GEN-LAST:event_bt_iniciarrecorridoMouseClicked
 
     /**
@@ -693,5 +695,5 @@ public class Principal extends javax.swing.JFrame {
     private boolean hayparadas = false;
     private boolean haybuses = false;
     private boolean hayestudiantes = false;
-    private boolean puederecorrer=true;
+    private boolean puederecorrer = true;
 }

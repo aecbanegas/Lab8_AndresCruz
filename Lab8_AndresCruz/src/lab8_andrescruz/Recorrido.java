@@ -7,6 +7,7 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -14,6 +15,7 @@ import javax.swing.JTable;
  */
 public class Recorrido implements Runnable {
 
+    private int tiempo;
     private JProgressBar pb;
     private Autobus bus;
     private ArrayList<Parada> pd;
@@ -37,6 +39,23 @@ public class Recorrido implements Runnable {
         fecha = new Date();
         vive = true;
         parada = true;
+    }
+
+    public void actuTabla() {
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
+                new Object[][]{},
+                new String[]{
+                    "Parada", "Tiempo", "Estudiante"
+                }
+        ));
+        DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
+        for (int i = 0; i < est.size(); i++) {
+            if (est.get(i).getParada().equals(actual)) {
+                Object[] row = {est.get(i).getParada(), tiempo, est.get(i).getNombre()};
+                modelo.addRow(row);
+            }
+        }
+        tabla.setModel(modelo);
     }
 
     public double distancia(ArrayList<Parada> pd) {
@@ -66,8 +85,7 @@ public class Recorrido implements Runnable {
                 }
                 actual = pd.get(index);
                 pd.remove(ante);
-                ante = index;
-                System.out.println(menor);
+                ante = index;                
                 return menor;
             }
         } else {
@@ -80,8 +98,8 @@ public class Recorrido implements Runnable {
 
     public double tiempo(Autobus bus, double distancia) {
         double time = (distancia / bus.getVelocidad()) * 60;
-        System.out.println(time);
         int max = (int) Math.round(time);
+        tiempo = max;
         pb.setMaximum(max);
         pb.setString("" + actual.getNombre() + " faltan " + pb.getValue() + " minutos");
         pb.setValue(0);
@@ -193,16 +211,16 @@ public class Recorrido implements Runnable {
                     pb.setValue(pb.getValue() + 1);
                     pb.setString("" + actual.getNombre() + " faltan " + (pb.getMaximum() - pb.getValue()) + " minutos");
                     if (pb.getValue() == pb.getMaximum()) {
+                        actuTabla();
                         parada = false;
                         JOptionPane.showMessageDialog(null, "Se completo el recorrido hacia " + actual.getNombre());
                         if (actual.getNombre().equals("UNITEC")) {
-                            puede=false;
-                            vive=false;
+                            puede = false;
+                            vive = false;
                         } else {
                             distancia = distancia(pd);
                             tiempo = tiempo(bus, distancia);
-                            pb.setMaximum((int) Math.round(tiempo));
-                            System.out.println(pb.getMaximum());
+                            pb.setMaximum((int) Math.round(tiempo));                            
                             parada = true;
                         }
                     }

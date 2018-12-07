@@ -16,12 +16,12 @@ public class Parada {
     double x;
     double y;
 
-    public Parada(String nombre, double distancia, double angulo, double x, double y) {
+    public Parada(String nombre, double distancia, double angulo) {
         this.nombre = nombre;
         this.distancia = distancia;
         this.angulo = angulo;
-        this.x = distancia*Math.cos(x);
-        this.y = distancia*Math.sin(y);
+        this.x = distancia*Math.cos(angulo);
+        this.y = distancia*Math.sin(angulo);
     }
 
     

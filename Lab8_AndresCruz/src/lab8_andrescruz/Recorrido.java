@@ -30,6 +30,8 @@ public class Recorrido implements Runnable {
     private JTable tabla;
 
     public Recorrido(JProgressBar pb, boolean puede, Autobus bus, ArrayList<Parada> pd, JTable tabla) {
+        pb.setValue(0);
+        pb.setString("");
         this.pb = pb;
         this.puede = puede;
         this.pd = pd;

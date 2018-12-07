@@ -437,7 +437,7 @@
                   <Component id="jButton1" max="32767" attributes="0"/>
                   <Component id="addestudiantes" max="32767" attributes="0"/>
                   <Component id="addbus" max="32767" attributes="0"/>
-                  <Component id="jButton4" max="32767" attributes="0"/>
+                  <Component id="bt_iniciarrecorrido" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
           </Group>
@@ -451,7 +451,7 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton4" min="-2" max="-2" attributes="0"/>
+                  <Component id="bt_iniciarrecorrido" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="pb_recorrido" min="-2" pref="50" max="-2" attributes="0"/>
@@ -517,6 +517,9 @@
       </Events>
     </Component>
     <Component class="javax.swing.JProgressBar" name="pb_recorrido">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
@@ -524,10 +527,13 @@
         <Property name="text" type="java.lang.String" value="Recorrido Bus"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton4">
+    <Component class="javax.swing.JButton" name="bt_iniciarrecorrido">
       <Properties>
         <Property name="text" type="java.lang.String" value="Iniciar Recorrido"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="bt_iniciarrecorridoMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>

@@ -76,7 +76,7 @@ public class Principal extends javax.swing.JFrame {
         addbus = new javax.swing.JButton();
         pb_recorrido = new javax.swing.JProgressBar();
         jLabel1 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        bt_iniciarrecorrido = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         jLabel3.setFont(new java.awt.Font("Viner Hand ITC", 3, 24)); // NOI18N
@@ -355,10 +355,17 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        pb_recorrido.setToolTipText("");
+
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Recorrido Bus");
 
-        jButton4.setText("Iniciar Recorrido");
+        bt_iniciarrecorrido.setText("Iniciar Recorrido");
+        bt_iniciarrecorrido.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_iniciarrecorridoMouseClicked(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Viner Hand ITC", 3, 24)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -379,7 +386,7 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(addestudiantes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(addbus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(bt_iniciarrecorrido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(60, 60, 60))
             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -390,7 +397,7 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jButton4))
+                    .addComponent(bt_iniciarrecorrido))
                 .addGap(18, 18, 18)
                 .addComponent(pb_recorrido, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
@@ -533,7 +540,7 @@ public class Principal extends javax.swing.JFrame {
             try {
                 String nombre = tf_nombreparada.getText();
                 Double distancia = (Double) js_distanciaparada.getValue();
-                Double angulo = (Double) js_angulo.getValue();
+                Double angulo = Math.toRadians((Double) js_angulo.getValue());
                 paradas.add(new Parada(nombre, distancia, angulo));
                 hayparadas = true;
                 JOptionPane.showMessageDialog(jd_addparadas, "Se agrego de manera exitosa!");
@@ -551,6 +558,15 @@ public class Principal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(jd_addestudiante, "Hay campos vacios!");
         }
     }//GEN-LAST:event_jButton5MouseClicked
+
+    private void bt_iniciarrecorridoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_iniciarrecorridoMouseClicked
+        // TODO add your handling code here:
+        if (puederecorrer) {
+            
+        }else{
+        JOptionPane.showMessageDialog(this, "Ya se esta haciendo una ruta!");
+        }
+    }//GEN-LAST:event_bt_iniciarrecorridoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -591,10 +607,10 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton addbus;
     private javax.swing.JButton addestudiantes;
     private javax.swing.JButton bt_colorbus;
+    private javax.swing.JButton bt_iniciarrecorrido;
     private javax.swing.JComboBox<String> cb_paradaestudiantes;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -639,4 +655,5 @@ public class Principal extends javax.swing.JFrame {
     private boolean hayparadas = false;
     private boolean haybuses = false;
     private boolean hayestudiantes = false;
+    private boolean puederecorrer=true;
 }

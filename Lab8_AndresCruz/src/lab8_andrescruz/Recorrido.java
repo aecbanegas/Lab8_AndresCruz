@@ -41,11 +41,11 @@ public class Recorrido implements Runnable {
         fecha = new Date();
         vive = true;
         parada = true;
-        cont=0;
-        ante=0;
+        cont = 0;
+        ante = 0;
     }
 
-    public void actuTabla() {        
+    public void actuTabla() {
         DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
         for (int i = 0; i < est.size(); i++) {
             if (est.get(i).getParada().equals(actual)) {
@@ -64,8 +64,6 @@ public class Recorrido implements Runnable {
         this.tiempo = tiempo;
     }
 
-    
-    
     public double distancia(ArrayList<Parada> pd) {
 //        if (pd.size() != 1) {
         if (cont == 0) {
@@ -218,11 +216,7 @@ public class Recorrido implements Runnable {
     public void run() {
         double distancia = distancia(pd);
         double tiempo = tiempo(bus, distancia);
-        System.out.println(pb.getMaximum());
-        System.out.println(pb.getValue());
         pb.setValue(0);
-        System.out.println(tiempo);
-        System.out.println(distancia);
         while (vive) {
             if (puede) {
                 if (parada) {
@@ -232,10 +226,9 @@ public class Recorrido implements Runnable {
                         actuTabla();
                         parada = false;
                         JOptionPane.showMessageDialog(null, "Se completo el recorrido hacia " + actual.getNombre());
-                        if (actual.getNombre().equals("UNITEC")) {                                               
+                        if (actual.getNombre().equals("UNITEC")) {
                             puede = false;
-                            vive = false;                            
-                            
+                            vive = false;
                         } else {
                             distancia = distancia(pd);
                             tiempo = tiempo(bus, distancia);

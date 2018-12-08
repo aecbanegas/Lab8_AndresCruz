@@ -147,9 +147,10 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(tf_placabus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jd_addbusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(bt_colorbus, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jd_addbusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bt_colorbus, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jd_addbusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel6)))
                 .addGap(18, 18, 18)
                 .addGroup(jd_addbusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -437,7 +438,7 @@ public class Principal extends javax.swing.JFrame {
     private void jb_agregarbusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_agregarbusMouseClicked
         // TODO add your handling code here:
         boolean entrar = true;
-        if (tf_idbus.getText().equals("") || tf_placabus.getText().equals("")) {
+        if (tf_idbus.getText().equals("") || tf_placabus.getText().equals("")||validacionidbus(tf_idbus.getText())) {
             entrar = false;
         }
         if (entrar) {
@@ -488,6 +489,24 @@ public class Principal extends javax.swing.JFrame {
         }
     }
 
+    public boolean validacionnombre(String nombre) {
+        for (int i = 0; i < estudiantes.size(); i++) {
+            if (nombre.equals(estudiantes.get(i).getNombre())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean validacionidbus(String idbus) {
+        for (int i = 0; i < buses.size(); i++) {
+            if (idbus.equals(buses.get(i).getId())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean validacionunica(String cuenta) {
         for (int i = 0; i < estudiantes.size(); i++) {
             if (estudiantes.get(i).getCuenta().equals(cuenta)) {
@@ -500,7 +519,8 @@ public class Principal extends javax.swing.JFrame {
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
         // TODO add your handling code here:
         boolean entrar = true;
-        if (tf_nombreestudiante.getText().equals("") || tf_cuenta.getText().equals("") || validacioncuenta(tf_cuenta.getText()) || validacionunica(tf_cuenta.getText())) {
+        if (tf_nombreestudiante.getText().equals("") || tf_cuenta.getText().equals("")
+                || validacioncuenta(tf_cuenta.getText()) || validacionunica(tf_cuenta.getText())||validacionnombre(tf_nombreestudiante.getText())) {
             entrar = false;
         }
         if (entrar) {
@@ -535,7 +555,7 @@ public class Principal extends javax.swing.JFrame {
     private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
         // TODO add your handling code here:
         boolean entrar = true;
-        if (tf_nombreparada.getText().equals("")) {
+        if (tf_nombreparada.getText().equals("") || tf_nombreparada.getText().equals("UNITEC")) {
             entrar = false;
         }
         if (entrar) {
@@ -564,63 +584,69 @@ public class Principal extends javax.swing.JFrame {
 
     private void bt_iniciarrecorridoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_iniciarrecorridoMouseClicked
         // TODO add your handling code here:
-
-        if (haybuses && hayestudiantes && hayparadas) {            
-            tab_resumen.setModel(new javax.swing.table.DefaultTableModel(
-                    new Object[][]{},
-                    new String[]{
-                        "Parada", "Tiempo", "Estudiante"
-                    }
-            ));
-            for (int i = 0; i < buses.size(); i++) {
-                buses.get(i).getEstudiantes().clear();
-            }
-            ArrayList<Estudiante> est = new ArrayList();
-            for (int i = 0; i < estudiantes.size(); i++) {
-                est.add(estudiantes.get(i));
-            }
-            ArrayList<Parada> pads = new ArrayList();
-            for (int i = 0; i < paradas.size(); i++) {
-                pads.add(paradas.get(i));
-            }
-            String imprimir = "";
-            for (int i = 0; i < buses.size(); i++) {
-                imprimir += i + " - " + buses.get(i) + "\n";
-            }
-            try {
-                int pos = Integer.parseInt(JOptionPane.showInputDialog(imprimir + "Ingrese la posicion del bus que desea usar: "));
-                boolean flag = true;
-                while (flag) {
-                    imprimir = "";
-                    for (int i = 0; i < est.size(); i++) {
-                        imprimir += i + " - " + est.get(i) + "\n";
-                    }
-                    if (!est.isEmpty()) {
-                        int opt = Integer.parseInt(JOptionPane.showInputDialog(imprimir + "Ingrese la posicion del estudiante que desea agregar:"));
-                        buses.get(pos).getEstudiantes().add(est.get(opt));
-                        est.remove(opt);
-                        int opc = Integer.parseInt(JOptionPane.showInputDialog("Ingrese 1 para salir y otro numero para seguir y agregar otro estudiante:"));
-                        if (opc == 1) {
+        if (pb_recorrido.getValue()==pb_recorrido.getMaximum()) {
+            puederecorrer=true;
+        }
+        if (puederecorrer) {
+            if (haybuses && hayestudiantes && hayparadas) {
+                tab_resumen.setModel(new javax.swing.table.DefaultTableModel(
+                        new Object[][]{},
+                        new String[]{
+                            "Parada", "Tiempo", "Estudiante"
+                        }
+                ));
+                for (int i = 0; i < buses.size(); i++) {
+                    buses.get(i).getEstudiantes().clear();
+                }
+                ArrayList<Estudiante> est = new ArrayList();
+                for (int i = 0; i < estudiantes.size(); i++) {
+                    est.add(estudiantes.get(i));
+                }
+                ArrayList<Parada> pads = new ArrayList();
+                for (int i = 0; i < paradas.size(); i++) {
+                    pads.add(paradas.get(i));
+                }
+                String imprimir = "";
+                for (int i = 0; i < buses.size(); i++) {
+                    imprimir += i + " - " + buses.get(i) + "\n";
+                }
+                try {
+                    int pos = Integer.parseInt(JOptionPane.showInputDialog(imprimir + "Ingrese la posicion del bus que desea usar: "));
+                    boolean flag = true;
+                    while (flag) {
+                        imprimir = "";
+                        for (int i = 0; i < est.size(); i++) {
+                            imprimir += i + " - " + est.get(i) + "\n";
+                        }
+                        if (!est.isEmpty()) {
+                            int opt = Integer.parseInt(JOptionPane.showInputDialog(imprimir + "Ingrese la posicion del estudiante que desea agregar:"));
+                            buses.get(pos).getEstudiantes().add(est.get(opt));
+                            est.remove(opt);
+                            int opc = Integer.parseInt(JOptionPane.showInputDialog("Ingrese 1 para salir y otro numero para seguir y agregar otro estudiante:"));
+                            if (opc == 1) {
+                                flag = false;
+                            }
+                        } else {
                             flag = false;
                         }
-                    } else {
-                        flag = false;
                     }
-
+                    rec = new Recorrido(pb_recorrido, puederecorrer, buses.get(pos), pads, tab_resumen);
+                    rec.setCont(0);
+                    rec.setVive(true);
+                    rec.setParada(true);
+                    rec.setPuede(true);
+                    Thread a = new Thread(rec);
+                    a.start();
+                    cont++;
+                    puederecorrer = false;
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Ha ocurrido un error!");
                 }
-                rec = new Recorrido(pb_recorrido, puederecorrer, buses.get(pos), pads, tab_resumen);
-                rec.setCont(0);
-                rec.setVive(true);
-                rec.setParada(true);
-                rec.setPuede(true);
-                Thread a = new Thread(rec);
-                a.start();                
-                puederecorrer = false;                
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Ha ocurrido un error!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Cree buses, estudiantes y paradas para usar esta opcion!");
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Cree buses, estudiantes y paradas para usar esta opcion!");
+            JOptionPane.showMessageDialog(this, "Ya se esta ejecutando una simulacion!");
         }
     }//GEN-LAST:event_bt_iniciarrecorridoMouseClicked
 
@@ -714,4 +740,5 @@ public class Principal extends javax.swing.JFrame {
     private boolean hayestudiantes = false;
     private boolean puederecorrer = true;
     Recorrido rec;
+    private int cont = 0;
 }

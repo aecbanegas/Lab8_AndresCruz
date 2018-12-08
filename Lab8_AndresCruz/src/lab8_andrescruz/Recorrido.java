@@ -218,6 +218,11 @@ public class Recorrido implements Runnable {
     public void run() {
         double distancia = distancia(pd);
         double tiempo = tiempo(bus, distancia);
+        System.out.println(pb.getMaximum());
+        System.out.println(pb.getValue());
+        pb.setValue(0);
+        System.out.println(tiempo);
+        System.out.println(distancia);
         while (vive) {
             if (puede) {
                 if (parada) {

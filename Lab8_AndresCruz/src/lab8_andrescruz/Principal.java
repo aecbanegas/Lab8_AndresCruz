@@ -610,6 +610,9 @@ public class Principal extends javax.swing.JFrame {
                 }
                 rec = new Recorrido(pb_recorrido, puederecorrer, buses.get(pos), pads, tab_resumen);
                 rec.setCont(0);
+                rec.setVive(true);
+                rec.setParada(true);
+                rec.setPuede(true);
                 Thread a = new Thread(rec);
                 a.start();                
                 puederecorrer = false;                

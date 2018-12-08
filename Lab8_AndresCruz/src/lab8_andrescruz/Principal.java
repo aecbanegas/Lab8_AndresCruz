@@ -458,7 +458,7 @@ public class Principal extends javax.swing.JFrame {
             } catch (Exception e) {
             }
         } else {
-            JOptionPane.showMessageDialog(jd_addbus, "Hay campos vacios!");
+            JOptionPane.showMessageDialog(jd_addbus, "Hay campos vacios u otro autobus tiene la misma id!");
         }
 
     }//GEN-LAST:event_jb_agregarbusMouseClicked
@@ -506,7 +506,16 @@ public class Principal extends javax.swing.JFrame {
         }
         return false;
     }
-
+    
+    public boolean validacionparada(String parada){
+        for (int i = 0; i < paradas.size(); i++) {
+            if (parada.equals(paradas.get(i).getNombre())) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
     public boolean validacionunica(String cuenta) {
         for (int i = 0; i < estudiantes.size(); i++) {
             if (estudiantes.get(i).getCuenta().equals(cuenta)) {
@@ -540,7 +549,7 @@ public class Principal extends javax.swing.JFrame {
             } catch (Exception e) {
             }
         } else {
-            JOptionPane.showMessageDialog(jd_addestudiante, "Hay campos vacios!");
+            JOptionPane.showMessageDialog(jd_addestudiante, "Hay campos vacios o algunos datos ingresados estan repetidos o escritos de manera erronea!");
         }
     }//GEN-LAST:event_jButton3MouseClicked
 
@@ -555,7 +564,7 @@ public class Principal extends javax.swing.JFrame {
     private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
         // TODO add your handling code here:
         boolean entrar = true;
-        if (tf_nombreparada.getText().equals("") || tf_nombreparada.getText().equals("UNITEC")) {
+        if (tf_nombreparada.getText().equals("") || tf_nombreparada.getText().equals("UNITEC")||validacionparada(tf_nombreparada.getText())) {
             entrar = false;
         }
         if (entrar) {
@@ -578,7 +587,7 @@ public class Principal extends javax.swing.JFrame {
             }
 
         } else {
-            JOptionPane.showMessageDialog(jd_addestudiante, "Hay campos vacios!");
+            JOptionPane.showMessageDialog(jd_addestudiante, "Hay campos vacios o se estan repitiendo datos!");
         }
     }//GEN-LAST:event_jButton5MouseClicked
 

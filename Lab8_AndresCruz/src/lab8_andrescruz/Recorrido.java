@@ -49,7 +49,7 @@ public class Recorrido implements Runnable {
         DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
         for (int i = 0; i < est.size(); i++) {
             if (est.get(i).getParada().equals(actual)) {
-                Object[] row = {est.get(i).getParada(), tiempo, est.get(i).getNombre()};
+                Object[] row = {est.get(i).getParada(), tiempo+" minutos", est.get(i).getNombre()};
                 modelo.addRow(row);
             }
         }

@@ -41,15 +41,11 @@ public class Recorrido implements Runnable {
         fecha = new Date();
         vive = true;
         parada = true;
+        cont=0;
+        ante=0;
     }
 
-    public void actuTabla() {
-        tabla.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][]{},
-                new String[]{
-                    "Parada", "Tiempo", "Estudiante"
-                }
-        ));
+    public void actuTabla() {        
         DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
         for (int i = 0; i < est.size(); i++) {
             if (est.get(i).getParada().equals(actual)) {
@@ -60,22 +56,33 @@ public class Recorrido implements Runnable {
         tabla.setModel(modelo);
     }
 
+    public int getTiempo() {
+        return tiempo;
+    }
+
+    public void setTiempo(int tiempo) {
+        this.tiempo = tiempo;
+    }
+
+    
+    
     public double distancia(ArrayList<Parada> pd) {
-        if (pd.size() != 1) {
-            if (cont == 0) {
-                int index = 0;
-                Double menor = 999999999.9;
-                for (int i = 0; i < pd.size(); i++) {
-                    if (pd.get(i).getDistancia() < menor) {
-                        index = i;
-                        menor = pd.get(i).getDistancia();
-                    }
+//        if (pd.size() != 1) {
+        if (cont == 0) {
+            int index = 0;
+            Double menor = 999999999.9;
+            for (int i = 0; i < pd.size(); i++) {
+                if (pd.get(i).getDistancia() < menor) {
+                    index = i;
+                    menor = pd.get(i).getDistancia();
                 }
-                cont++;
-                actual = pd.get(index);
-                ante = index;
-                return actual.getDistancia();
-            } else {
+            }
+            cont++;
+            actual = pd.get(index);
+            ante = index;
+            return actual.getDistancia();
+        } else {
+            if (pd.size() != 1) {
                 ArrayList<Double> d = new ArrayList();
                 int index = 0;
                 Double menor = 999999999.9;
@@ -87,15 +94,19 @@ public class Recorrido implements Runnable {
                 }
                 actual = pd.get(index);
                 pd.remove(ante);
-                ante = index;                
+                ante = index;
+                return menor;
+            } else {
+                double menor = Math.sqrt(Math.pow(0 - actual.getX(), 2) + Math.pow(0 - actual.getY(), 2));
+                actual = new Parada("UNITEC", 0, 0);
                 return menor;
             }
-        } else {
-            double menor = Math.sqrt(Math.pow(0 - actual.getX(), 2) + Math.pow(0 - actual.getY(), 2));
-            actual = new Parada("UNITEC", 0, 0);
-            return menor;
+//        } else {
+//            double menor = Math.sqrt(Math.pow(0 - actual.getX(), 2) + Math.pow(0 - actual.getY(), 2));
+//            actual = new Parada("UNITEC", 0, 0);
+//            return menor;
+//        }
         }
-
     }
 
     public double tiempo(Autobus bus, double distancia) {
@@ -216,13 +227,14 @@ public class Recorrido implements Runnable {
                         actuTabla();
                         parada = false;
                         JOptionPane.showMessageDialog(null, "Se completo el recorrido hacia " + actual.getNombre());
-                        if (actual.getNombre().equals("UNITEC")) {
+                        if (actual.getNombre().equals("UNITEC")) {                                               
                             puede = false;
-                            vive = false;
+                            vive = false;                            
+                            
                         } else {
                             distancia = distancia(pd);
                             tiempo = tiempo(bus, distancia);
-                            pb.setMaximum((int) Math.round(tiempo));                            
+                            pb.setMaximum((int) Math.round(tiempo));
                             parada = true;
                         }
                     }
